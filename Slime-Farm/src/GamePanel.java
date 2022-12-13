@@ -12,9 +12,11 @@ public class GamePanel extends JPanel implements Runnable{
     
     Thread gameThread;
     int FPS = 60;
+
+    public final int orginalSize = 64;
     
-    public final int screenWidth = 768;
-    public final int screenHeight = 1024;
+    public final int screenWidth = orginalSize * 12;
+    public final int screenHeight = orginalSize * 16;
 
     public GamePanel(){
         this.setPreferredSize(new Dimension(screenWidth,screenHeight));
