@@ -10,27 +10,43 @@ public class entity {
     public int moveRange=40;
     public int speed=1;
     public String name;
-    public Rectangle hitbox = new Rectangle(screenX,screenY,64,64);
+    public Rectangle hitbox = new Rectangle(screenX-32,screenY-32,64,64);
     public boolean startMoveing=false;
-    BufferedImage image;
+    public boolean hold=false;
+    BufferedImage image[]= new BufferedImage[10];
     public int moveInterval =0;
+    public int currentImage=0;
     int nextX;
     int nextY;
 
-    public void getPoint(){
-
+    public void getPoint(GamePanel gp){
+        //make endpoint where entity go in range of 40
         nextX =screenX + getRandomNumber(-moveRange, moveRange);
         nextY =screenY + getRandomNumber(-moveRange, moveRange);
+        //cant go out of bounds of background + one slime
+        if(nextX>gp.screenWidth-gp.orginalSize){
+            nextX=-moveRange;
+        }
+        if(nextX<0+gp.orginalSize){
+            nextX=+moveRange;
+        }
+        if(nextY>gp.screenHeight-gp.orginalSize*3){
+            nextY=-moveRange;
+        }
+        if(nextY<0+gp.orginalSize){
+            nextY=+moveRange;
+        }
 
-        
-        System.out.println("X:"+nextX+" Y:"+nextY);
         startMoveing = true;
     }
+    //function to generate random numbers
     public int getRandomNumber(int min, int max) {
         return (int) ((Math.random() * (max - min)) + min);
     }
 
-    public void move(){
+    public void move(GamePanel gp){
+        //move to end point from this point
+
         if(screenX>nextX){
             screenX-=speed;
         }
@@ -43,11 +59,22 @@ public class entity {
         if(screenY<nextY){
             screenY+=speed;
         }
+        hitbox.x=screenX;
+        hitbox.y=screenY;
     }
-
+    public void drag(GamePanel gp,int x,int y){
+            
+            if(screenX>0 && screenX<gp.screenWidth){
+                screenX= x - gp.orginalSize/2;
+            }
+            if(screenY>0 && screenY<gp.screenHeight){
+                screenY= y - gp.orginalSize/2;
+            
+        }
+    }
     public void draw(Graphics2D g2 ,GamePanel gp){
      
-        g2.drawImage(image, screenX, screenY, gp.orginalSize, gp.orginalSize, null);
-        
+        g2.drawImage(image[currentImage], screenX, screenY, gp.orginalSize, gp.orginalSize, null);
+       
     }
 }

@@ -21,7 +21,7 @@ public class GamePanel extends JPanel implements Runnable{
     public ClickHandler cHandler = new ClickHandler(this,ui);
     public SlimeSpawner sSpawner = new SlimeSpawner(this, cHandler);
     public slime slime = new slime(this);
-    public entity e[] = new entity[10];
+    public entity e[] = new entity[300];
     
     Thread gameThread;
     int FPS = 60;
@@ -33,6 +33,7 @@ public class GamePanel extends JPanel implements Runnable{
         this.setBackground(Color.black);
         this.setFocusable(true);
         this.addMouseListener(cHandler);
+        this.addMouseMotionListener(cHandler);
     }
 
     public void startGameThread(){
@@ -76,34 +77,43 @@ public class GamePanel extends JPanel implements Runnable{
 
     }
         public void update(){
-      
+            //cHandler.mosePostion();
+           // System.out.println(cHandler.mouseX+" "+cHandler.mouseY);
+            //gets new destination point every 5 secounds
             for(int i=0;i<e.length;i++){
                 if(e[i]!=null&&e[i].moveInterval==5){
-                e[i].getPoint();
+                e[i].getPoint(this);
                 e[i].moveInterval=0;
                 }
             }
            
-        
+            //moves entities to destination point
          for(int i=0;i<e.length;i++){
             if(e[i]!=null && e[i].startMoveing ==true){
-                e[i].move();
+                e[i].move(this);
              }
              }
+         if(cHandler.hold==true){
+           
+            e[cHandler.clickedEntity].drag(this,cHandler.mouseX,cHandler.mouseY);
+            e[cHandler.clickedEntity].getPoint(this);
+             }
+
         }
+        
 
         public void paintComponent (Graphics g){
             super.paintComponent(g);
              Graphics2D g2 = (Graphics2D)g;
              bm.draw(g2);
-             ui.draw(g2);
              
              for(int i=0;i<e.length;i++){
-                if(e[i]!=null){
-                    e[i].draw(g2, this);
+                 if(e[i]!=null){
+                     e[i].draw(g2, this);
+                    }
                 }
-             }
-             
+                
+             ui.draw(g2);
              g2.dispose();
          }
 }

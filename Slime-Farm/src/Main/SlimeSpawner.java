@@ -10,8 +10,11 @@ public class SlimeSpawner {
     }
 
     public void spawn(int num,int x,int y){
+        //make basic slime
         gp.e[num]= new slime(gp);
         gp.e[num].screenX=x;
         gp.e[num].screenY=y;
+        gp.e[num].hitbox.x=x;
+        gp.e[num].hitbox.y=y;
     }
 }
