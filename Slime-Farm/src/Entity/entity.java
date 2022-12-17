@@ -18,6 +18,7 @@ public class entity {
     public int currentImage=0;
     int nextX;
     int nextY;
+    int slimesize;
 
     public void getPoint(GamePanel gp){
         //make endpoint where entity go in range of 40
@@ -73,8 +74,8 @@ public class entity {
         }
     }
     public void draw(Graphics2D g2 ,GamePanel gp){
-     
-        g2.drawImage(image[currentImage], screenX, screenY, gp.orginalSize, gp.orginalSize, null);
+        slimesize = gp.orginalSize + gp.orginalSize/2;
+        g2.drawImage(image[currentImage], screenX, screenY, slimesize, slimesize, null);
        
     }
 }
