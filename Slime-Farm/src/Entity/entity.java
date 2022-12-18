@@ -12,10 +12,10 @@ public class entity {
     public String name;
     public Rectangle hitbox = new Rectangle(screenX-32,screenY-32,64,64);
     public boolean startMoveing=false;
-    public boolean hold=false;
-    BufferedImage image[]= new BufferedImage[10];
+    public boolean hold=false ;
+    public BufferedImage image[]= new BufferedImage[13];
     public int moveInterval =0;
-    public int currentImage=0;
+    public int currentImage=0,hatchframe=0;;
     int nextX;
     int nextY;
     int slimesize;
@@ -74,7 +74,7 @@ public class entity {
         }
     }
     public void draw(Graphics2D g2 ,GamePanel gp){
-        slimesize = gp.orginalSize + gp.orginalSize/2;
+        slimesize = gp.orginalSize + gp.orginalSize/4;
         g2.drawImage(image[currentImage], screenX, screenY, slimesize, slimesize, null);
        
     }

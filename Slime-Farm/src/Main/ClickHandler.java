@@ -10,10 +10,12 @@ import java.awt.Rectangle;
 public class ClickHandler implements MouseListener,MouseMotionListener {
     GamePanel gp;
     UI ui;
-    public int clickNum=0;
+    
     public boolean hold= false;
     public int clickedEntity;
     public int mouseX ,mouseY;
+    int freenum;
+    int randomnum;
     public Rectangle matchHitbox ;
   
     
@@ -21,17 +23,17 @@ public class ClickHandler implements MouseListener,MouseMotionListener {
         this.gp=gp;
         this.ui=ui;
     }
-    int num = clickNum;
+    
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        int x=gp.screenWidth/2 , y=gp.screenHeight/2;;
+        randomnum = getRandomNumber(-100,100);
+        int x=gp.screenWidth/2+randomnum , y=gp.screenHeight/2+randomnum;
         
         //make buy button work to spawn
-        if(ui.buyButton.contains(mouseX, mouseY)){
-            num = clickNum;
-            gp.sSpawner.spawn(clickNum,x,y);
-            clickNum ++;
+        if(ui.hatchButton.contains(mouseX, mouseY)){
+            freenum = getNum();
+            gp.sSpawner.spawn(getNum(),x,y);
         }    
     }
 
@@ -41,7 +43,8 @@ public class ClickHandler implements MouseListener,MouseMotionListener {
         for(int i=0;i<gp.e.length;i++){
             if(gp.e[i]!=null && gp.e[i].hitbox.contains(mouseX,mouseY)){
                 hold=true;
-                clickedEntity = i;            
+                clickedEntity = i;  
+                System.out.println(clickedEntity);          
             }
         }
     }
@@ -56,10 +59,12 @@ public class ClickHandler implements MouseListener,MouseMotionListener {
                gp.e[i].hitbox.contains(gp.e[clickedEntity].screenX,gp.e[clickedEntity].screenY )&& 
                i!=clickedEntity &&
                matchHitbox.contains(gp.e[clickedEntity].screenX, gp.e[clickedEntity].screenY)){
-                   if(used ==0 &&gp.e[i].currentImage == gp.e[clickedEntity].currentImage){
+                   if(used ==0 &&gp.e[i].currentImage == gp.e[clickedEntity].currentImage 
+                   &&gp.e[clickedEntity].currentImage<gp.e[clickedEntity].image.length-1){
                              gp.e[i] = null;
                              used++;
                              gp.e[clickedEntity].currentImage++;
+                             System.gc();
                          }
                          
             }
@@ -92,15 +97,20 @@ public class ClickHandler implements MouseListener,MouseMotionListener {
       
     }
 
-    //public int getNum(int[] arr){
-       // int freenum=0;
-       // for(int i =0;i<arr.length;i++){
-        //    if(arr[i]!=null){
+    public int getNum(){
+        freenum=0;
+        for(int i =0;i<gp.e.length;i++){
+            if(gp.e[i]==null){
+                freenum=i;
+                break;
+            }
+        }
+        return freenum;
+    }
 
-        //    }
-       // }
-  //  }
-
+    public int getRandomNumber(int min, int max) {
+        return (int) ((Math.random() * (max - min)) + min);
+    }
 
  
     
