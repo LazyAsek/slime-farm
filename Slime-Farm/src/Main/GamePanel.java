@@ -22,6 +22,7 @@ public class GamePanel extends JPanel implements Runnable{
     public SlimeSpawner sSpawner = new SlimeSpawner(this, cHandler);
     public slime slime = new slime(this);
     public entity e[] = new entity[300];
+    public Economy eco = new Economy(this);
     
     Thread gameThread;
     int FPS = 60;
@@ -49,6 +50,7 @@ public class GamePanel extends JPanel implements Runnable{
       long timer=0,currentTime;
       int drawCount=0;
       
+      
       while(gameThread !=null){
         currentTime = System.nanoTime();
 
@@ -74,8 +76,11 @@ public class GamePanel extends JPanel implements Runnable{
                     e[i].currentImage++;
                     e[i].hatchframe++;
                 }
-                }
-           }
+            }
+        }
+        eco.getTiers();
+        eco.eggDelay++;
+        eco.updateValues();
         }
       }
 

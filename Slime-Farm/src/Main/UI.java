@@ -86,7 +86,7 @@ public class UI {
 
         eggsX = hatchButtonX+100 ;
         eggsY = gp.orginalSize+gp.orginalSize/2;
-        eggs = 0;
+        eggs = 5;
         eggLimit=10;
         eggsText = eggs +"/"+eggLimit;
 
@@ -95,6 +95,15 @@ public class UI {
         perSec = 0;
         perSecText = perSec+"";
     }
+    
+    public void formatCoins(){
+        if(coin>10000){
+            coinText=coin/10000+"k";
+        }else{
+            coinText = coin+"";
+        }
+    }
+
 
     public void draw(Graphics2D g2){
       

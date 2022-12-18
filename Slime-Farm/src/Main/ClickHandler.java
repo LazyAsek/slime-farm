@@ -31,9 +31,10 @@ public class ClickHandler implements MouseListener,MouseMotionListener {
         int x=gp.screenWidth/2+randomnum , y=gp.screenHeight/2+randomnum;
         
         //make buy button work to spawn
-        if(ui.hatchButton.contains(mouseX, mouseY)){
+        if(ui.hatchButton.contains(mouseX, mouseY)&&gp.ui.eggs>0){
             freenum = getNum();
             gp.sSpawner.spawn(getNum(),x,y);
+            gp.ui.eggs--;
         }    
     }
 
@@ -44,7 +45,7 @@ public class ClickHandler implements MouseListener,MouseMotionListener {
             if(gp.e[i]!=null && gp.e[i].hitbox.contains(mouseX,mouseY)){
                 hold=true;
                 clickedEntity = i;  
-                System.out.println(clickedEntity);          
+               // System.out.println(clickedEntity);          
             }
         }
     }
