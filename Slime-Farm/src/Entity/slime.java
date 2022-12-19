@@ -31,7 +31,6 @@ public class slime extends entity{
             image[9] = ImageIO.read(new FileInputStream("Slime-Farm/res/slimes/slime7.png"));
             image[10] = ImageIO.read(new FileInputStream("Slime-Farm/res/slimes/slime8.png"));
             image[11] = ImageIO.read(new FileInputStream("Slime-Farm/res/slimes/slime9.png"));
-            image[12] = ImageIO.read(new FileInputStream("Slime-Farm/res/slimes/slime10.png"));
         }catch(IOException e){
             e.printStackTrace();
         }

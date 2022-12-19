@@ -13,7 +13,7 @@ public class entity {
     public Rectangle hitbox = new Rectangle(screenX-32,screenY-32,64,64);
     public boolean startMoveing=false;
     public boolean hold=false ;
-    public BufferedImage image[]= new BufferedImage[13];
+    public BufferedImage image[]= new BufferedImage[12];
     public int moveInterval =0;
     public int currentImage=0,hatchframe=0;;
     int nextX;

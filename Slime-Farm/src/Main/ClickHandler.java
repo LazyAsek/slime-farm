@@ -31,27 +31,36 @@ public class ClickHandler implements MouseListener,MouseMotionListener {
         int x=gp.screenWidth/2+randomnum , y=gp.screenHeight/2+randomnum;
         
         //make buy button work to spawn
-        if(ui.hatchButton.contains(mouseX, mouseY)&&gp.ui.eggs>0){
+        if(ui.hatchButton.contains(mouseX, mouseY)&&gp.ui.eggs>0&&gp.ui.shopOpen==false){
             freenum = getNum();
             gp.sSpawner.spawn(getNum(),x,y);
             gp.ui.eggs--;
         }    
+        if(ui.shopButton.contains(mouseX, mouseY)){
+            gp.ui.shopOpen=true;
+            gp.ui.shopOpen();
+        }   
+        if(ui.shopClose.contains(mouseX, mouseY)&& gp.ui.shopOpen==true){
+            gp.ui.shopOpen=false;
+        } 
     }
 
     @Override
     public void mousePressed(MouseEvent e) {
-        
-        for(int i=0;i<gp.e.length;i++){
-            if(gp.e[i]!=null && gp.e[i].hitbox.contains(mouseX,mouseY)){
-                hold=true;
-                clickedEntity = i;  
-               // System.out.println(clickedEntity);          
+        if(gp.ui.shopOpen==false){
+            for(int i=0;i<gp.e.length;i++){
+                if(gp.e[i]!=null && gp.e[i].hitbox.contains(mouseX,mouseY)){
+                    hold=true;
+                    clickedEntity = i;  
+                   // System.out.println(clickedEntity);          
+                }
             }
         }
     }
 
     @Override
     public void mouseReleased(MouseEvent e) {
+        if(gp.ui.shopOpen==false){
         hold = false;
         matchHitbox = new Rectangle(mouseX-128,mouseY-128,128,128);
         int used = 0;
@@ -70,6 +79,7 @@ public class ClickHandler implements MouseListener,MouseMotionListener {
                          
             }
         }
+    }
         
     }
 

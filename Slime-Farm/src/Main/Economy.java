@@ -4,7 +4,7 @@ public class Economy {
     GamePanel gp;
     int slime1,slime2,slime3,slime4,slime5,slime6,slime7,slime8,slime9,slime10;
     int perSec;
-    int eggDelay=10;
+    int eggDelay=0,maxEggDelay=12;
     public Economy(GamePanel gp){
         this.gp=gp;
     }
@@ -29,27 +29,35 @@ public class Economy {
                     break;
                     case 4:
                     slime2++;
+                    gp.ui.unlocked2 = true;
                     break;
                     case 5:
                     slime3++;
+                    gp.ui.unlocked3 = true;
                     break;
                     case 6:
                     slime4++;
+                    gp.ui.unlocked4 = true;
                     break;
                     case 7:
                     slime5++;
+                    gp.ui.unlocked5 = true;
                     break;
                     case 8:
                     slime6++;
+                    gp.ui.unlocked6 = true;
                     break;
                     case 9:
                     slime7++;
+                    gp.ui.unlocked7 = true;
                     break;
                     case 10:
                     slime8++;
+                    gp.ui.unlocked8 = true;
                     break;
                     case 11:
                     slime9++;
+                    gp.ui.unlocked9 = true;
                     break;
                     case 12:
                     slime10++;
@@ -75,9 +83,12 @@ public class Economy {
     public void updateValues(){
         gp.ui.coin += perSec;
         gp.ui.perSec = perSec;
-        if(eggDelay > 4&& gp.ui.eggs !=10){
+        if(eggDelay > maxEggDelay&& gp.ui.eggs !=10){
             gp.ui.eggs++;
             eggDelay=0;
+        }
+        if(gp.ui.eggs !=10){
+            gp.ui.eggBarUpdate();
         }
 
         gp.ui.formatCoins();
