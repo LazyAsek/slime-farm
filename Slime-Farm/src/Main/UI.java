@@ -14,7 +14,7 @@ public class UI {
     
     GamePanel gp;
     Font arial40;
-    BufferedImage uiImage ;
+    BufferedImage uiImage , upgradeShop ;
     BufferedImage eggBar[] = new BufferedImage[5];
     BufferedImage shopState[] = new BufferedImage[9];
     int hatchButtonWidth,hatchButtonHeight,shopButtonWidth,shopButtonHeight,upgradeButtonWidth,upgradeButtonHeight;
@@ -22,7 +22,7 @@ public class UI {
 
     int shopOpenX,shopOpenY,shopOpenWidth,shopOpenHeight;
 
-    int coin ,eggs,perSec,eggLimit;
+    public int coin ,eggs,perSec,eggLimit;
     String coinText,eggsText,perSecText;
     int coinX,coinY;
     int eggsX,eggsY;
@@ -33,12 +33,16 @@ public class UI {
 
     boolean shopOpen=false,unlocked1=true,unlocked2=false,unlocked3=false,unlocked4=false,unlocked5=false,unlocked6=false,unlocked7=false,unlocked8=false,unlocked9=false;
 
+    boolean upgradeShopOpen=false;
+
     public Rectangle hatchButton ,shopButton,upgradeButton,shopClose,buyslime1,buyslime2,buyslime3,buyslime4,buyslime5,buyslime6,buyslime7,buyslime8,buyslime9;
-    
+    public Rectangle buyUpgrade1,buyUpgrade2,buyUpgrade3,buyUpgrade4;
     ClickHandler cHandler = new ClickHandler(gp,this);
 
     int shopStateNum=0;
-    
+
+    public String slime1PriceText,slime2PriceText,slime3PriceText,slime4PriceText,slime5PriceText,slime6PriceText,slime7PriceText,slime8PriceText,slime9PriceText,slime10PriceText;
+    public String upgrade1PriceText,upgrade2PriceText,upgrade3PriceText,upgrade4PriceText;
     public UI(GamePanel gp){
         this.gp =gp;
         getUi();
@@ -66,6 +70,7 @@ public class UI {
             shopState[6] = ImageIO.read(new FileInputStream("Slime-Farm/res/UI/shop/shop7.png"));
             shopState[7] = ImageIO.read(new FileInputStream("Slime-Farm/res/UI/shop/shop8.png"));
             shopState[8] = ImageIO.read(new FileInputStream("Slime-Farm/res/UI/shop/shop9.png"));
+            upgradeShop = ImageIO.read(new FileInputStream("Slime-Farm/res/UI/upgradeMenu.png"));
         }catch(IOException e){
             e.printStackTrace();
         }
@@ -109,7 +114,7 @@ public class UI {
     public void topBar(){
         coinX = shopButtonX+60 ;
         coinY = gp.orginalSize+gp.orginalSize/2;
-        coin = 1000000;
+        coin = 100000;
         coinText = coin +"";
 
         eggsX = hatchButtonX+30 ;
@@ -147,6 +152,85 @@ public class UI {
         }else{
             coinText = coin+"";
         }
+
+        if(gp.eco.slime1Price>10000){
+            slime1PriceText=gp.eco.slime1Price/10000+"k";
+        }else{
+            slime1PriceText = gp.eco.slime1Price+"";
+        }
+        if(gp.eco.slime2Price>10000){
+            slime2PriceText=gp.eco.slime2Price/10000+"k";
+        }else{
+            slime2PriceText = gp.eco.slime2Price+"";
+        }
+        if(gp.eco.slime3Price>10000){
+            slime3PriceText=gp.eco.slime3Price/10000+"k";
+        }else{
+            slime3PriceText = gp.eco.slime3Price+"";
+        }
+        if(gp.eco.slime4Price>10000){
+            slime4PriceText=gp.eco.slime4Price/10000+"k";
+        }else{
+            slime4PriceText = gp.eco.slime4Price+"";
+        }
+        if(gp.eco.slime5Price>10000){
+            slime5PriceText=gp.eco.slime5Price/10000+"k";
+        }else{
+            slime5PriceText = gp.eco.slime5Price+"";
+        }
+        if(gp.eco.slime6Price>10000){
+            slime6PriceText=gp.eco.slime6Price/10000+"k";
+        }else{
+            slime6PriceText = gp.eco.slime6Price+"";
+        }
+        if(gp.eco.slime7Price>10000){
+            slime7PriceText=gp.eco.slime7Price/10000+"k";
+        }else{
+            slime7PriceText = gp.eco.slime7Price+"";
+        }
+        if(gp.eco.slime8Price>10000){
+            slime8PriceText=gp.eco.slime8Price/10000+"k";
+        }else{
+            slime8PriceText = gp.eco.slime8Price+"";
+        }
+        if(gp.eco.slime9Price>10000){
+            slime9PriceText=gp.eco.slime9Price/10000+"k";
+        }else{
+            slime9PriceText = gp.eco.slime9Price+"";
+        }
+        if(gp.eco.upgrade1Price>10000){
+            upgrade1PriceText=gp.eco.upgrade1Price/10000+"k";
+        }else{
+            upgrade1PriceText = gp.eco.upgrade1Price+"";
+        }
+        if(gp.eco.upgrade2Price>10000){
+            upgrade2PriceText=gp.eco.upgrade2Price/10000+"k";
+        }else{
+            upgrade2PriceText = gp.eco.upgrade2Price+"";
+        }
+        if(gp.eco.upgrade3Price>10000){
+            upgrade3PriceText=gp.eco.upgrade3Price/10000+"k";
+        }else{
+            upgrade3PriceText = gp.eco.upgrade3Price+"";
+        }
+        if(gp.eco.upgrade4Price>10000){
+            upgrade4PriceText=gp.eco.upgrade4Price/10000+"k";
+        }else{
+            upgrade4PriceText = gp.eco.upgrade4Price+"";
+        }
+        
+    }
+    public void upgradeShopOpen(){
+        int buyX=gp.screenWidth-gp.orginalSize*3-gp.orginalSize/4;
+        int buyY=gp.orginalSize*4+gp.orginalSize/10;
+        int buyWidth =gp.orginalSize*2;
+        int buyHeight =gp.orginalSize-gp.orginalSize/2+gp.orginalSize/4;
+
+        shopClose = new Rectangle( shopOpenWidth - gp.orginalSize-gp.orginalSize/3,gp.orginalSize,gp.orginalSize+gp.orginalSize/4,gp.orginalSize+gp.orginalSize/4);
+        buyUpgrade1 = new Rectangle( buyX,buyY,buyWidth,buyHeight);
+        buyUpgrade2 = new Rectangle( buyX,buyY*2-buyHeight-buyHeight/2-buyHeight/4,buyWidth,buyHeight);
+        buyUpgrade3 = new Rectangle( buyX,buyY*3-buyHeight*3-buyHeight/3,buyWidth,buyHeight);
+        buyUpgrade4 = new Rectangle( buyX,buyY*4-buyHeight*5,buyWidth,buyHeight);
     }
 
     public void shopOpen(){
@@ -205,7 +289,53 @@ public class UI {
       if(shopOpen==true){
           g2.drawImage(shopState[shopStateNum], shopOpenX,shopOpenY,shopOpenWidth,shopOpenHeight, null);
           //g2.fillRect(buyslime9.x,buyslime9.y,(int)buyslime9.getWidth(),(int)buyslime9.getHeight());
+          if(unlocked1==true){
+              g2.drawString(slime1PriceText, buyslime1.x+gp.orginalSize/8, buyslime1.y-gp.orginalSize/6);
+          }
+          if(unlocked2==true){
+              g2.drawString(slime2PriceText, buyslime2.x+gp.orginalSize/8, buyslime2.y-gp.orginalSize/6);           
+          }
+          if(unlocked3==true){
+              g2.drawString(slime3PriceText, buyslime3.x+gp.orginalSize/3, buyslime3.y-gp.orginalSize/6);          
+          }
+          if(unlocked4==true){
+              g2.drawString(slime4PriceText, buyslime4.x+gp.orginalSize/8, buyslime4.y-gp.orginalSize/6);
+          }
+          if(unlocked5==true){
+              g2.drawString(slime5PriceText, buyslime5.x+gp.orginalSize/8, buyslime5.y-gp.orginalSize/6);         
+          }
+          if(unlocked6==true){
+              g2.drawString(slime6PriceText, buyslime6.x+gp.orginalSize/3, buyslime6.y-gp.orginalSize/6);    
+          }
+          if(unlocked7==true){
+              g2.drawString(slime7PriceText, buyslime7.x+gp.orginalSize/8, buyslime7.y-gp.orginalSize/6);         
+          }
+          if(unlocked8==true){
+              g2.drawString(slime8PriceText, buyslime8.x+gp.orginalSize/8, buyslime8.y-gp.orginalSize/6);        
+          }
+          if(unlocked9==true){
+              g2.drawString(slime9PriceText, buyslime9.x+gp.orginalSize/3, buyslime9.y-gp.orginalSize/6);         
+          }
       }
-     
+      if(upgradeShopOpen ==true){
+        g2.drawImage(upgradeShop, shopOpenX,shopOpenY,shopOpenWidth,shopOpenHeight, null);
+       // g2.fillRect(buyUpgrade4.x,buyUpgrade4.y, (int)buyUpgrade4.getWidth(), (int)buyUpgrade4.getHeight());
+         g2.drawString(upgrade1PriceText, buyUpgrade1.x+gp.orginalSize/8, buyUpgrade1.y-gp.orginalSize/6);
+         g2.drawString(upgrade2PriceText, buyUpgrade2.x+gp.orginalSize/8, buyUpgrade2.y-gp.orginalSize/6);
+         g2.drawString(upgrade3PriceText, buyUpgrade3.x+gp.orginalSize/8, buyUpgrade3.y-gp.orginalSize/6);
+         g2.drawString(upgrade4PriceText, buyUpgrade4.x+gp.orginalSize/8, buyUpgrade4.y-gp.orginalSize/8);
+
+         g2.drawString(" "+(gp.eco.upgrade1BCounter-1)*10+"%", buyUpgrade1.x-gp.orginalSize*5, buyUpgrade1.y+gp.orginalSize/4);
+         g2.drawString(" "+(gp.eco.upgrade1BCounter)*10+"%", buyUpgrade1.x-gp.orginalSize*2, buyUpgrade1.y+gp.orginalSize/4);
+
+         g2.drawString(" "+(gp.eco.maxEggDelay)+"s", buyUpgrade1.x-gp.orginalSize*5, buyUpgrade1.y+gp.orginalSize*3);
+         g2.drawString(" "+(gp.eco.maxEggDelay-1)+"s", buyUpgrade1.x-gp.orginalSize*2, buyUpgrade1.y+gp.orginalSize*3);
+
+         g2.drawString(" "+(eggLimit)+"", buyUpgrade1.x-gp.orginalSize*5, buyUpgrade1.y+gp.orginalSize*6);
+         g2.drawString(" "+(eggLimit+1)+"", buyUpgrade1.x-gp.orginalSize*2, buyUpgrade1.y+gp.orginalSize*6);
+
+         g2.drawString(" "+(gp.eco.twinChance)+"%", buyUpgrade1.x-gp.orginalSize*5, buyUpgrade1.y+gp.orginalSize*9-gp.orginalSize/4);
+         g2.drawString(" "+(gp.eco.twinChance+1)+"%", buyUpgrade1.x-gp.orginalSize*2, buyUpgrade1.y+gp.orginalSize*9-gp.orginalSize/4);
+        }
     }
 }

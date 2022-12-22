@@ -72,7 +72,7 @@ public class GamePanel extends JPanel implements Runnable{
             for(int i=0;i<e.length;i++){
                 if(e[i]!=null){
                 e[i].moveInterval ++;
-                if(e[i].hatchframe<3){
+                if(e[i].hatchframe<3&& e[i].currentImage<3){
                     e[i].currentImage++;
                     e[i].hatchframe++;
                 }
