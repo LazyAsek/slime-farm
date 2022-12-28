@@ -178,6 +178,7 @@ public class ClickHandler implements MouseListener,MouseMotionListener {
                              gp.e[i] = null;
                              used++;
                              gp.e[clickedEntity].currentImage++;
+                             gp.playSE(1);
                              System.gc();
                          }
                          

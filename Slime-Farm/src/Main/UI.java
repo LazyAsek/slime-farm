@@ -114,7 +114,7 @@ public class UI {
     public void topBar(){
         coinX = shopButtonX+60 ;
         coinY = gp.orginalSize+gp.orginalSize/2;
-        coin = 100000;
+        coin = 0;
         coinText = coin +"";
 
         eggsX = hatchButtonX+30 ;
@@ -290,31 +290,31 @@ public class UI {
           g2.drawImage(shopState[shopStateNum], shopOpenX,shopOpenY,shopOpenWidth,shopOpenHeight, null);
           //g2.fillRect(buyslime9.x,buyslime9.y,(int)buyslime9.getWidth(),(int)buyslime9.getHeight());
           if(unlocked1==true){
-              g2.drawString(slime1PriceText, buyslime1.x+gp.orginalSize/8, buyslime1.y-gp.orginalSize/6);
+              g2.drawString(slime1PriceText, buyslime1.x+gp.orginalSize/8, buyslime1.y-gp.orginalSize/8);
           }
           if(unlocked2==true){
-              g2.drawString(slime2PriceText, buyslime2.x+gp.orginalSize/8, buyslime2.y-gp.orginalSize/6);           
+              g2.drawString(slime2PriceText, buyslime2.x+gp.orginalSize/8, buyslime2.y-gp.orginalSize/8);           
           }
           if(unlocked3==true){
-              g2.drawString(slime3PriceText, buyslime3.x+gp.orginalSize/3, buyslime3.y-gp.orginalSize/6);          
+              g2.drawString(slime3PriceText, buyslime3.x+gp.orginalSize/3, buyslime3.y-gp.orginalSize/8);          
           }
           if(unlocked4==true){
-              g2.drawString(slime4PriceText, buyslime4.x+gp.orginalSize/8, buyslime4.y-gp.orginalSize/6);
+              g2.drawString(slime4PriceText, buyslime4.x+gp.orginalSize/8, buyslime4.y-gp.orginalSize/8);
           }
           if(unlocked5==true){
-              g2.drawString(slime5PriceText, buyslime5.x+gp.orginalSize/8, buyslime5.y-gp.orginalSize/6);         
+              g2.drawString(slime5PriceText, buyslime5.x+gp.orginalSize/8, buyslime5.y-gp.orginalSize/8);         
           }
           if(unlocked6==true){
-              g2.drawString(slime6PriceText, buyslime6.x+gp.orginalSize/3, buyslime6.y-gp.orginalSize/6);    
+              g2.drawString(slime6PriceText, buyslime6.x+gp.orginalSize/3, buyslime6.y-gp.orginalSize/8);    
           }
           if(unlocked7==true){
-              g2.drawString(slime7PriceText, buyslime7.x+gp.orginalSize/8, buyslime7.y-gp.orginalSize/6);         
+              g2.drawString(slime7PriceText, buyslime7.x+gp.orginalSize/8, buyslime7.y-gp.orginalSize/8);         
           }
           if(unlocked8==true){
-              g2.drawString(slime8PriceText, buyslime8.x+gp.orginalSize/8, buyslime8.y-gp.orginalSize/6);        
+              g2.drawString(slime8PriceText, buyslime8.x+gp.orginalSize/8, buyslime8.y-gp.orginalSize/8);        
           }
           if(unlocked9==true){
-              g2.drawString(slime9PriceText, buyslime9.x+gp.orginalSize/3, buyslime9.y-gp.orginalSize/6);         
+              g2.drawString(slime9PriceText, buyslime9.x+gp.orginalSize/3, buyslime9.y-gp.orginalSize/8);         
           }
       }
       if(upgradeShopOpen ==true){

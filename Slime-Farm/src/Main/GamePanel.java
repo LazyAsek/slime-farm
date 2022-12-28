@@ -23,7 +23,9 @@ public class GamePanel extends JPanel implements Runnable{
     public slime slime = new slime(this);
     public entity e[] = new entity[300];
     public Economy eco = new Economy(this);
-    
+    public Saves s = new Saves(this);
+    Sound music = new Sound();
+    Sound SE = new Sound();
     Thread gameThread;
     int FPS = 60;
     
@@ -35,6 +37,11 @@ public class GamePanel extends JPanel implements Runnable{
         this.setFocusable(true);
         this.addMouseListener(cHandler);
         this.addMouseMotionListener(cHandler);
+        playMusic(0);
+        s.load();
+        if(s.FirstSave==true){
+           s.save();
+        }
     }
 
     public void startGameThread(){
@@ -49,7 +56,7 @@ public class GamePanel extends JPanel implements Runnable{
       long lastTime = System.nanoTime();
       long timer=0,currentTime;
       int drawCount=0;
-      
+      sSpawner.loadSlimes();
       
       while(gameThread !=null){
         currentTime = System.nanoTime();
@@ -81,6 +88,14 @@ public class GamePanel extends JPanel implements Runnable{
         eco.getTiers();
         eco.eggDelay++;
         eco.updateValues();
+        s.SaveInterval--;
+        if(s.FirstSave==true){
+            s.FirstSave=false;
+        }
+        if(s.SaveInterval==0){
+            s.SaveInterval=10;
+            s.save();
+        }
         }
       }
 
@@ -124,5 +139,17 @@ public class GamePanel extends JPanel implements Runnable{
                 
              ui.draw(g2);
              g2.dispose();
+         }
+         public void playMusic(int i){
+            music.setFile(i);
+            music.play();
+            music.loop();
+         }
+         public void stopMusic(){
+            music.stop();
+         }
+         public void playSE(int i){
+            SE.setFile(i);
+            SE.play();
          }
 }
