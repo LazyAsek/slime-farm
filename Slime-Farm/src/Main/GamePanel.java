@@ -3,18 +3,21 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-
+import java.awt.GraphicsDevice;
 import javax.swing.JPanel;
-
+import java.awt.GraphicsEnvironment;
 import Entity.entity;
 import Entity.slime;
 
 
 public class GamePanel extends JPanel implements Runnable{
     
-    public final int orginalSize = 64;
-    public final int screenWidth = orginalSize * 12;//768
-    public final int screenHeight = orginalSize * 16; //1024
+      GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
+    //  public final int screenWidth= gd.getDisplayMode().getWidth()/2;
+    //  public final int screenHeight= gd.getDisplayMode().getHeight()-100;
+      public final int orginalSize = 64;
+      public final int screenWidth = orginalSize * 12;//768
+      public final int screenHeight = orginalSize * 16; //1024
     
     public BackgroundMenager bm = new BackgroundMenager(this);
     public UI ui= new UI(this);
