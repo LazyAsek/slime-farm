@@ -1,5 +1,5 @@
 FirstSave=false
-Coins=126
+Coins=186
 Eggs=1
 slime2Unlocked=true
 slime3Unlocked=false
